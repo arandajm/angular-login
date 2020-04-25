@@ -6,51 +6,51 @@
           Login
         </span>
 
-                <span class="text-danger animated fadeIn" *ngIf="loginForm.submitted && email.errors">El correo es obligatorio</span
-        >
-        <div class="wrap-input100 m-b-16">
-          <input
-            class="input100"
-            type="email"
-            name="email"
-            placeholder="Email"
-            [(ngModel)]="usuario.email"
-            required
-            email
-            #email="ngModel"
-          />
-
-          <span class="focus-input100"></span>
-        </div>
-
-        <span class="text-danger animated fadeIn" *ngIf="loginForm.submitted && password.errors">La contraseña debe de ser más de 6 letras
+                <span class="text-danger animated fadeIn" *ngIf="loginForm.submitted && email.errors">
+          <span *ngIf="email.errors['required']">El correo es obligatorio</span>
+                <span *ngIf="email.errors['email']">El email debe cumplir el formato de correo electronico</span
+          >
         </span>
-        <div class="wrap-input100 m-b-16">
-            <input class="input100" type="password" name="password" placeholder="Password" [(ngModel)]="usuario.password" required minlength="6" #password="ngModel" />
-            <span class="focus-input100"></span>
-        </div>
+                <div class="wrap-input100 m-b-16">
+                    <input class="input100" type="email" name="email" placeholder="Email" [(ngModel)]="usuario.email" required email #email="ngModel" />
 
-        <div class="flex-sb-m w-full p-t-3 p-b-24">
-            <div class="contact100-form-checkbox">
-                <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me" />
-                <label class="label-checkbox100" for="ckb1">
+                    <span class="focus-input100"></span>
+                </div>
+
+                <span class="text-danger" *ngIf="loginForm.submitted && password.errors">
+          <span *ngIf="password.errors['required']"
+            >La contraseña es obligatoria</span
+          >
+          <span *ngIf="password.errors['minlength']"
+            >La contraseña debe de ser más de 6 letras</span
+          >
+        </span>
+                <div class="wrap-input100 m-b-16">
+                    <input class="input100" type="password" name="password" placeholder="Password" [(ngModel)]="usuario.password" required minlength="6" #password="ngModel" />
+                    <span class="focus-input100"></span>
+                </div>
+
+                <div class="flex-sb-m w-full p-t-3 p-b-24">
+                    <div class="contact100-form-checkbox">
+                        <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me" />
+                        <label class="label-checkbox100" for="ckb1">
               Recordar mi usuario
             </label>
-            </div>
+                    </div>
 
-            <div>
-                <a routerLink="/registro" class="txt1">
+                    <div>
+                        <a routerLink="/registro" class="txt1">
               ¿No tienes cuenta?
             </a>
-            </div>
-        </div>
+                    </div>
+                </div>
 
-        <div class="container-login100-form-btn m-t-17">
-            <button class="login100-form-btn" type="submit">
+                <div class="container-login100-form-btn m-t-17">
+                    <button class="login100-form-btn" type="submit">
             Ingresar
           </button>
+                </div>
+            </form>
         </div>
-        </form>
     </div>
-</div>
 </div>
