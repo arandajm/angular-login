@@ -16,9 +16,20 @@ export class AuthService {
 
   login(user: UsuarioModel) {}
 
-  register(user: UsuarioModel) {}
+  register(user: UsuarioModel) {
+    const payload = {
+      email: user.email,
+      password: user.password,
+      returnSecureToken: true,
+    };
+    return this.http.post(this.getUrl('accounts:signUp'), payload);
+  }
 
   logout() {
     console.log('logout');
+  }
+
+  getUrl(query: string) {
+    return `${this.url}${query}?key=${this.apiKey}`;
   }
 }

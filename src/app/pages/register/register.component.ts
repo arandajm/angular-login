@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UsuarioModel } from 'src/app/models/usuario.model';
 import { NgForm } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -8,7 +9,7 @@ import { NgForm } from '@angular/forms';
 })
 export class RegisterComponent implements OnInit {
   usuario: UsuarioModel;
-  constructor() {}
+  constructor(private _authService: AuthService) {}
 
   ngOnInit(): void {
     this.usuario = new UsuarioModel();
@@ -18,7 +19,13 @@ export class RegisterComponent implements OnInit {
     if (registerForm.invalid) {
       return;
     }
-    console.log(registerForm);
-    console.log(this.usuario);
+    this._authService.register(this.usuario).subscribe(
+      (data) => {
+        console.log(data);
+      },
+      (err) => {
+        console.log(err.error.error.message);
+      }
+    );
   }
 }
