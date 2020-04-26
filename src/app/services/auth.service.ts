@@ -1,15 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { UsuarioModel } from '../models/usuario.model';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   private url: string = 'https://identitytoolkit.googleapis.com/v1/';
-  private apiKey: string = 'AIzaSyDQYydhCWkaXDG6Q_UUvLO1EM4xus0smtU';
+  private apiKey: string;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.apiKey = environment.apiKey;
+  }
 
   login(user: UsuarioModel) {
     const payload = {
