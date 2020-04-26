@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   apiKey: 'AIzaSyDQYydhCWkaXDG6Q_UUvLO1EM4xus0smtU',
+  firebaseUrl: 'https://identitytoolkit.googleapis.com/v1/',
 };
 
 /*

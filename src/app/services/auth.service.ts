@@ -7,11 +7,12 @@ import { environment } from '../../environments/environment';
   providedIn: 'root',
 })
 export class AuthService {
-  private url: string = 'https://identitytoolkit.googleapis.com/v1/';
+  private url: string;
   private apiKey: string;
 
   constructor(private http: HttpClient) {
     this.apiKey = environment.apiKey;
+    this.url = environment.firebaseUrl;
   }
 
   login(user: UsuarioModel) {
