@@ -68,4 +68,8 @@ export class AuthService {
   getToken() {
     return localStorage.getItem('token') ? localStorage.getItem('token') : '';
   }
+
+  isAuthenticated() {
+    return this.token.length > 2;
+  }
 }
