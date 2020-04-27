@@ -11,10 +11,14 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
   usuario: UsuarioModel;
+  recuerdame = false;
   constructor(private _authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
     this.usuario = new UsuarioModel();
+    if (localStorage.getItem('email')) {
+      this.recuerdame = true;
+    }
   }
 
   registrarUsuario(registerForm: NgForm) {
@@ -30,7 +34,7 @@ export class RegisterComponent implements OnInit {
     this._authService.register(this.usuario).subscribe(
       (data) => {
         Swal.close();
-        this.router.navigateByUrl('/home');
+        this.router.navigateByUrl('/login');
       },
       (err) => {
         Swal.fire({
