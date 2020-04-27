@@ -54,6 +54,7 @@ export class AuthService {
 
   logout() {
     console.log('logout');
+    localStorage.removeItem('token');
   }
 
   getUrl(query: string) {
