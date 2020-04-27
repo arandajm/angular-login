@@ -30,6 +30,8 @@ export class AuthService {
         map((resp) => {
           // Set token
           this.setToken(resp['idToken']);
+          // Set Token Expiration
+          this.setTokenExpiration(resp['expiresIn']);
           // return resp to continue the chain
           return resp;
         })
@@ -53,8 +55,8 @@ export class AuthService {
   }
 
   logout() {
-    console.log('logout');
     localStorage.removeItem('token');
+    localStorage.removeItem('expiresIn');
   }
 
   getUrl(query: string) {
@@ -66,11 +68,24 @@ export class AuthService {
     localStorage.setItem('token', token);
   }
 
+  setTokenExpiration(expirationTime: string) {
+    let today = new Date();
+    today.setSeconds(Number(expirationTime));
+    localStorage.setItem('expiresIn', today.getTime().toString());
+  }
+
   getToken() {
     return localStorage.getItem('token') ? localStorage.getItem('token') : '';
   }
 
   isAuthenticated() {
-    return this.token.length > 2;
+    if (this.token.length < 2) {
+      return false;
+    }
+
+    const expira = Number(localStorage.getItem('expiresIn'));
+    const expiraDate = new Date();
+    expiraDate.setTime(expira);
+    return expiraDate > new Date() ? true : false;
   }
 }
